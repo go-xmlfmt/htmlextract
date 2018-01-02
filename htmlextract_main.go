@@ -11,7 +11,9 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
+	"github.com/labstack/gommon/color"
 	"github.com/mkideal/cli"
 )
 
@@ -62,4 +64,58 @@ func htmlextract(ctx *cli.Context) error {
 	fmt.Println()
 
 	return nil
+}
+
+//==========================================================================
+// support functions
+
+// Abs returns the absolute value of x.
+func Abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+
+// Basename returns the file name without extension.
+func Basename(s string) string {
+	n := strings.LastIndexByte(s, '.')
+	if n > 0 {
+		return s[:n]
+	}
+	return s
+}
+
+// IsExist checks if the given file exist
+func IsExist(fileName string) bool {
+	_, err := os.Stat(fileName)
+	return err == nil || os.IsExist(err)
+}
+
+func warning(m string) {
+	fmt.Fprintf(os.Stderr, "[%s] %s: %s\n", progname, color.Yellow("Warning"), m)
+}
+
+func warnOn(errCase string, e error) {
+	if e != nil {
+		fmt.Fprintf(os.Stderr, "[%s] %s, %s: %v\n",
+			color.White(progname), color.Yellow("Error"), errCase, e)
+	}
+}
+
+// abortOn will quit on anticipated errors gracefully without stack trace
+func abortOn(errCase string, e error) {
+	if e != nil {
+		fmt.Fprintf(os.Stderr, "[%s] %s, %s: %v\n",
+			color.White(progname), color.Red("Error"), errCase, e)
+		os.Exit(1)
+	}
+}
+
+// verbose will print info to stderr according to the verbose level setting
+func verbose(levelSet int, format string, args ...interface{}) {
+	if Opts.Verbose >= levelSet {
+		fmt.Fprintf(os.Stderr, "[%s] ", color.White(progname))
+		fmt.Fprintf(os.Stderr, format+"\n", args...)
+	}
 }

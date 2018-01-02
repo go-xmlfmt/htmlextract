@@ -8,6 +8,8 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"regexp"
 
 	"github.com/mkideal/cli"
 )
@@ -21,5 +23,17 @@ func outlineCLI(ctx *cli.Context) error {
 	fmt.Printf("[outline]:\n  %+v\n  %+v\n  %v\n", rootArgv, argv, ctx.Args())
 	Opts.Case, Opts.Verbose =
 		rootArgv.Case, rootArgv.Verbose.Value()
-	return nil
+
+	if !ctx.IsSet("--output") {
+		fileo, err := os.Create(
+			regexp.MustCompile(`(?i)html?`).
+				ReplaceAllLiteralString(argv.Filei.Name(), "json"))
+		abortOn("Creating output file", err)
+		argv.Fileo.SetWriter(fileo)
+	}
+	fileo := argv.Fileo
+	defer fileo.Close()
+
+	z := NewExtractor(argv.Filei)
+	return z.Walk(fileo)
 }
