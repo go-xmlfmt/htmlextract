@@ -1,0 +1,24 @@
+html
+  head
+    title
+      go - Golang parse HTML, extract all content with <body> </body> tags - Stack Overflow
+    link
+      link
+        link
+          meta
+            meta
+            meta
+body
+  nav
+    div
+      a
+        h1
+          Foobar
+      br
+      ul
+        li
+          a
+            Topics
+        li
+          a
+            About
