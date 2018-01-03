@@ -31,7 +31,7 @@ func NewExtractor(i io.Reader) *Extractor {
 ////////////////////////////////////////////////////////////////////////////
 // Method definitions
 
-func (z Extractor) Walk(w io.Writer) error {
+func Walk(z *Extractor, w io.Writer) error {
 	// https://godoc.org/golang.org/x/net/html
 	depth := 0
 	for {

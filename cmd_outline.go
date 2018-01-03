@@ -35,5 +35,5 @@ func outlineCLI(ctx *cli.Context) error {
 	defer fileo.Close()
 
 	z := NewExtractor(argv.Filei)
-	return z.Walk(fileo)
+	return Walk(z, fileo)
 }
