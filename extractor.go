@@ -28,8 +28,8 @@ type extractor struct {
 ////////////////////////////////////////////////////////////////////////////
 // Function definitions
 
-func NewExtractor() extractor {
-	return extractor{}
+func NewExtractor(i io.Reader) (*html.Tokenizer, extractor) {
+	return html.NewTokenizer(i), extractor{}
 }
 
 ////////////////////////////////////////////////////////////////////////////
