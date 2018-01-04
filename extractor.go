@@ -17,21 +17,25 @@ import (
 ////////////////////////////////////////////////////////////////////////////
 // Constant and data type/structure definitions
 
-type Extractor struct {
+type Extractor interface {
+	VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writer, depth *int)
+}
+
+type extractor struct {
 	*html.Tokenizer
 }
 
 ////////////////////////////////////////////////////////////////////////////
 // Function definitions
 
-func NewExtractor(i io.Reader) *Extractor {
-	return &Extractor{html.NewTokenizer(i)}
+func NewExtractor() extractor {
+	return extractor{}
 }
 
 ////////////////////////////////////////////////////////////////////////////
 // Method definitions
 
-func Walk(z *Extractor, w io.Writer) error {
+func Walk(z *html.Tokenizer, e Extractor, w io.Writer) error {
 	// https://godoc.org/golang.org/x/net/html
 	depth := 0
 	for {
@@ -45,18 +49,18 @@ func Walk(z *Extractor, w io.Writer) error {
 			return err
 		case html.StartTagToken, html.EndTagToken:
 			if tt == html.StartTagToken {
-				z.VisitToken(tt, w, &depth)
+				e.VisitToken(z, tt, w, &depth)
 				depth++
 			} else {
 				depth--
 			}
 		default:
-			z.VisitToken(tt, w, &depth)
+			e.VisitToken(z, tt, w, &depth)
 		}
 	}
 }
 
-func (z *Extractor) VisitToken(tt html.TokenType, w io.Writer, depth *int) {
+func (e extractor) VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writer, depth *int) {
 	verbose(2, ">: %d (%v)", *depth, tt)
 	switch tt {
 	case html.TextToken:
@@ -67,7 +71,7 @@ func (z *Extractor) VisitToken(tt html.TokenType, w io.Writer, depth *int) {
 
 			text := strings.TrimSpace(string(z.Text()))
 			if text != "" {
-				z.PrintElmt(w, *depth, text)
+				e.PrintElmt(w, *depth, text)
 			}
 		}
 	case html.StartTagToken, html.SelfClosingTagToken:
@@ -77,11 +81,11 @@ func (z *Extractor) VisitToken(tt html.TokenType, w io.Writer, depth *int) {
 		if tag == "body" {
 			*depth = 0
 		}
-		z.PrintElmt(w, *depth, tag)
+		e.PrintElmt(w, *depth, tag)
 	}
 	verbose(2, "<: %d", *depth)
 }
 
-func (z *Extractor) PrintElmt(w io.Writer, depth int, s string) {
+func (e extractor) PrintElmt(w io.Writer, depth int, s string) {
 	fmt.Fprintf(w, "%*s%s\n", depth*2, "", s)
 }

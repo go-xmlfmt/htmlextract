@@ -12,6 +12,7 @@ import (
 	"regexp"
 
 	"github.com/mkideal/cli"
+	"golang.org/x/net/html"
 )
 
 ////////////////////////////////////////////////////////////////////////////
@@ -34,6 +35,6 @@ func outlineCLI(ctx *cli.Context) error {
 	fileo := argv.Fileo
 	defer fileo.Close()
 
-	z := NewExtractor(argv.Filei)
-	return Walk(z, fileo)
+	e := NewExtractor()
+	return Walk(html.NewTokenizer(argv.Filei), e, fileo)
 }
