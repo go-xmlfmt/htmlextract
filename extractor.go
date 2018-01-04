@@ -18,66 +18,66 @@ import (
 // Constant and data type/structure definitions
 
 type Extractor struct {
-	*html.Tokenizer
+	z *html.Tokenizer
 }
 
 ////////////////////////////////////////////////////////////////////////////
 // Function definitions
 
 func NewExtractor(i io.Reader) *Extractor {
-	return &Extractor{html.NewTokenizer(i)}
+	return &Extractor{z: html.NewTokenizer(i)}
 }
 
 ////////////////////////////////////////////////////////////////////////////
 // Method definitions
 
-func Walk(z *Extractor, w io.Writer) error {
+func Walk(e *Extractor, w io.Writer) error {
 	// https://godoc.org/golang.org/x/net/html
 	depth := 0
 	for {
-		tt := z.Next()
+		tt := e.z.Next()
 		switch tt {
 		case html.ErrorToken:
-			err := z.Err()
+			err := e.z.Err()
 			if err == io.EOF {
 				return nil // finished reading
 			}
 			return err
 		case html.StartTagToken, html.EndTagToken:
 			if tt == html.StartTagToken {
-				z.VisitToken(tt, w, &depth)
+				e.VisitToken(tt, w, &depth)
 				depth++
 			} else {
 				depth--
 			}
 		default:
-			z.VisitToken(tt, w, &depth)
+			e.VisitToken(tt, w, &depth)
 		}
 	}
 }
 
-func (z *Extractor) VisitToken(tt html.TokenType, w io.Writer, depth *int) {
+func (e *Extractor) VisitToken(tt html.TokenType, w io.Writer, depth *int) {
 	verbose(2, ">: %d (%v)", *depth, tt)
 	switch tt {
 	case html.TextToken:
 		if *depth > 0 {
 			// emitBytes should copy the []byte it receives,
 			// if it doesn't process it immediately.
-			// emitBytes(z.Text())
+			// emitBytes(e.z.Text())
 
-			text := strings.TrimSpace(string(z.Text()))
+			text := strings.TrimSpace(string(e.z.Text()))
 			if text != "" {
-				z.PrintElmt(w, *depth, text)
+				e.PrintElmt(w, *depth, text)
 			}
 		}
 	case html.StartTagToken, html.SelfClosingTagToken:
-		tn, _ := z.TagName()
+		tn, _ := e.z.TagName()
 		tag := string(tn)
 		verbose(2, " T: %s", tag)
 		if tag == "body" {
 			*depth = 0
 		}
-		z.PrintElmt(w, *depth, tag)
+		e.PrintElmt(w, *depth, tag)
 	}
 	verbose(2, "<: %d", *depth)
 }
