@@ -17,21 +17,25 @@ import (
 ////////////////////////////////////////////////////////////////////////////
 // Constant and data type/structure definitions
 
-type Extractor struct {
+type Extractor interface {
+	VisitToken(tt html.TokenType, w io.Writer, depth *int)
+}
+
+type extractor struct {
 	z *html.Tokenizer
 }
 
 ////////////////////////////////////////////////////////////////////////////
 // Function definitions
 
-func NewExtractor(i io.Reader) *Extractor {
-	return &Extractor{z: html.NewTokenizer(i)}
+func NewExtractor(i io.Reader) *extractor {
+	return &extractor{z: html.NewTokenizer(i)}
 }
 
 ////////////////////////////////////////////////////////////////////////////
 // Method definitions
 
-func Walk(e *Extractor, w io.Writer) error {
+func Walk(e Extractor, w io.Writer) error {
 	// https://godoc.org/golang.org/x/net/html
 	depth := 0
 	for {
@@ -56,7 +60,7 @@ func Walk(e *Extractor, w io.Writer) error {
 	}
 }
 
-func (e *Extractor) VisitToken(tt html.TokenType, w io.Writer, depth *int) {
+func (e *extractor) VisitToken(tt html.TokenType, w io.Writer, depth *int) {
 	verbose(2, ">: %d (%v)", *depth, tt)
 	switch tt {
 	case html.TextToken:
@@ -82,6 +86,6 @@ func (e *Extractor) VisitToken(tt html.TokenType, w io.Writer, depth *int) {
 	verbose(2, "<: %d", *depth)
 }
 
-func (z *Extractor) PrintElmt(w io.Writer, depth int, s string) {
+func (e *extractor) PrintElmt(w io.Writer, depth int, s string) {
 	fmt.Fprintf(w, "%*s%s\n", depth*2, "", s)
 }
