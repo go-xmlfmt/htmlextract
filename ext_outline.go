@@ -20,6 +20,8 @@ type extOutliner struct {
 	*extractor
 }
 
+var attrPick []string = []string{"id", "name", "css", "type", "onclick"}
+
 ////////////////////////////////////////////////////////////////////////////
 // Function definitions
 
@@ -38,11 +40,18 @@ func (e *extOutliner) VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writ
 		if tag.Name == "body" {
 			e.depth = 1
 			e.outputstart = true
-			fmt.Fprintln(w, `{`)
+		}
+		if e.levelopen[e.depth-1] {
+			fmt.Fprintln(w)
+			e.levelopen[e.depth-1] = false
 		}
 		e.PrintTag(w, tag)
+		e.levelopen[e.depth] = true
 	case html.EndTagToken:
-		fmt.Fprintf(w, "},\n")
+		if e.outputstart {
+			fmt.Fprintf(w, "},\n")
+			e.levelopen[e.depth] = false
+		}
 	}
 	verbose(2, "<: %d", e.depth)
 }
@@ -51,17 +60,23 @@ func (e *extOutliner) PrintTag(w io.Writer, tag Tag) {
 	if !e.outputstart {
 		return
 	}
-	fmt.Fprintf(w, "%*s{ \"%s\": {\n%*s  \"A\": \"",
+	fmt.Fprintf(w, "%*s{ \"%s\": {\n%*s\"=\": \"",
 		(e.depth-1)*2, "", tag.Name, e.depth*2, "")
 	e.PrintAttr(w, tag.Attr)
-	fmt.Fprintf(w, "\",\n%*s\"C\": {", e.depth*2, "")
+	fmt.Fprintf(w, "\",\n%*s\"_\": {", e.depth*2, "")
+	e.levelopen[e.depth] = true
 }
 
-func (e *extOutliner) PrintAttr(w io.Writer, a attributes) {
-	if len(a) == 0 {
+func (e *extOutliner) PrintAttr(w io.Writer, am attributes) {
+	if len(am) == 0 {
 		return
 	}
-	fmt.Fprintf(w, "%#v", a)
+	for _, p := range attrPick {
+		a, ok := am[p]
+		if ok {
+			fmt.Fprintf(w, "%s=%s ", p, a)
+		}
+	}
 }
 
 /*
