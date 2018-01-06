@@ -33,24 +33,34 @@ func NewExtOutliner(i io.Reader) *extOutliner {
 // Method definitions
 
 func (e *extOutliner) VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writer) {
-	verbose(2, ">: %d (%v)", e.depth, tt)
+	tag := TagParse(z)
+	verbose(2, ">: %d (%v: %s)", e.depth, tt, tag.Name)
 	switch tt {
 	case html.StartTagToken, html.SelfClosingTagToken:
-		tag := TagParse(z)
 		if tag.Name == "body" {
 			e.depth = 1
 			e.outputstart = true
+			fmt.Fprintf(w, "{\n")
 		}
-		if e.levelopen[e.depth-1] {
+		if !e.justOpenUsed && e.justOpenSet {
 			fmt.Fprintln(w)
-			e.levelopen[e.depth-1] = false
+			e.justOpenUsed = true
+		}
+		if tt == html.SelfClosingTagToken {
+			e.depth++
 		}
 		e.PrintTag(w, tag)
-		e.levelopen[e.depth] = true
+		if tt == html.SelfClosingTagToken {
+			fmt.Fprintf(w, "}},\n")
+			e.depth--
+		} else {
+			e.justOpenSet = true
+			e.justOpenUsed = false
+		}
 	case html.EndTagToken:
 		if e.outputstart {
-			fmt.Fprintf(w, "},\n")
-			e.levelopen[e.depth] = false
+			fmt.Fprintf(w, "}},\n")
+			e.justOpenUsed = true
 		}
 	}
 	verbose(2, "<: %d", e.depth)
@@ -60,11 +70,10 @@ func (e *extOutliner) PrintTag(w io.Writer, tag Tag) {
 	if !e.outputstart {
 		return
 	}
-	fmt.Fprintf(w, "%*s{ \"%s\": {\n%*s\"=\": \"",
+	fmt.Fprintf(w, "%*s\"%s\": {\n%*s\"=\": \"",
 		(e.depth-1)*2, "", tag.Name, e.depth*2, "")
 	e.PrintAttr(w, tag.Attr)
 	fmt.Fprintf(w, "\",\n%*s\"_\": {", e.depth*2, "")
-	e.levelopen[e.depth] = true
 }
 
 func (e *extOutliner) PrintAttr(w io.Writer, am attributes) {

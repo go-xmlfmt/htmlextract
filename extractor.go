@@ -38,8 +38,9 @@ type extractor struct {
 	z     *html.Tokenizer
 	depth int
 	// for extOutliner
-	outputstart bool
-	levelopen   map[int]bool
+	outputstart  bool
+	justOpenSet  bool
+	justOpenUsed bool
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -66,7 +67,7 @@ func TagParse(parser TagParser) Tag {
 func NewExtractor(i io.Reader) *extractor {
 	e := extractor{}
 	e.z = html.NewTokenizer(i)
-	e.levelopen = make(map[int]bool)
+	e.justOpenUsed = true
 	return &e
 }
 

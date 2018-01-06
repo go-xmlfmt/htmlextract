@@ -1,24 +1,209 @@
-html
-  head
-    title
-      go - Golang parse HTML, extract all content with <body> </body> tags - Stack Overflow
-    link
-      link
-        link
-          meta
-            meta
-            meta
-body
-  nav
-    div
-      a
-        h1
-          Foobar
-      br
-      ul
-        li
-          a
-            Topics
-        li
-          a
-            About
+
+
+
+
+
+
+{
+
+"body": {
+  "=": "",
+  "_": {
+  "h1": {
+    "=": "",
+    "_": {}},
+  "div": {
+    "=": "id=ctrlBtns ",
+    "_": {}},
+  "br": {
+    "=": "",
+    "_": {}},
+  "div": {
+    "=": "id=pluginList ",
+    "_": {}},
+  "div": {
+    "=": "id=gridContainer ",
+    "_": {}},
+  "br": {
+    "=": "",
+    "_": {}},
+  "div": {
+    "=": "id=ctrlBtns2 ",
+    "_": {}},
+  "br": {
+    "=": "",
+    "_": {}},
+  "div": {
+    "=": "id=menusSupport ",
+    "_": {
+    "div": {
+      "=": "id=headerMenu ",
+      "_": {
+      "div": {
+        "=": "",
+        "_": {}},
+      "div": {
+        "=": "",
+        "_": {}},
+}},
+    "div": {
+      "=": "id=rowMenu ",
+      "_": {
+      "div": {
+        "=": "",
+        "_": {}},
+}},
+}},
+  "div": {
+    "=": "id=exporterSupport ",
+    "_": {
+    "input": {
+      "=": "id=exportAllCSV type=button ",
+      "_": {}},
+    "textarea": {
+      "=": "id=csvResults ",
+      "_": {}},
+}},
+  "div": {
+    "=": "id=printerSupport ",
+    "_": {
+    "input": {
+      "=": "type=button onclick=printGrid() ",
+      "_": {}},
+    "input": {
+      "=": "type=button onclick=printSelected() ",
+      "_": {}},
+    "input": {
+      "=": "type=button onclick=printPreview() ",
+      "_": {}},
+    "input": {
+      "=": "id=print_title type=text ",
+      "_": {}},
+}},
+  "div": {
+    "=": "id=cellMergeSupport ",
+    "_": {
+    "table": {
+      "=": "",
+      "_": {
+      "tr": {
+        "=": "",
+        "_": {
+        "td": {
+          "=": "",
+          "_": {}},
+        "td": {
+          "=": "",
+          "_": {
+          "input": {
+            "=": "id=inputRow type=text ",
+            "_": {}},
+}},
+}},
+      "tr": {
+        "=": "",
+        "_": {
+        "td": {
+          "=": "",
+          "_": {}},
+        "td": {
+          "=": "",
+          "_": {
+          "input": {
+            "=": "id=inputStart type=text ",
+            "_": {}},
+}},
+}},
+      "tr": {
+        "=": "",
+        "_": {
+        "td": {
+          "=": "",
+          "_": {}},
+        "td": {
+          "=": "",
+          "_": {
+          "input": {
+            "=": "id=inputEnd type=text ",
+            "_": {}},
+}},
+}},
+      "tr": {
+        "=": "",
+        "_": {
+        "td": {
+          "=": "",
+          "_": {}},
+        "td": {
+          "=": "",
+          "_": {
+          "input": {
+            "=": "id=inputMajor type=text ",
+            "_": {}},
+}},
+}},
+      "tr": {
+        "=": "",
+        "_": {
+        "td": {
+          "=": "",
+          "_": {
+          "button": {
+            "=": "id=mergeCell onclick=mergeCells() ",
+            "_": {}},
+}},
+}},
+}},
+}},
+  "div": {
+    "=": "id=paginationSupport ",
+    "_": {
+    "table": {
+      "=": "",
+      "_": {
+      "tr": {
+        "=": "",
+        "_": {
+        "td": {
+          "=": "",
+          "_": {
+          "input": {
+            "=": "id=inputScrollToRowIdx type=text ",
+            "_": {}},
+}},
+        "td": {
+          "=": "",
+          "_": {
+          "button": {
+            "=": "id=scrollToRow ",
+            "_": {}},
+}},
+}},
+}},
+}},
+  "div": {
+    "=": "",
+    "_": {
+    "p": {
+      "=": "",
+      "_": {
+      "h2": {
+        "=": "",
+        "_": {}},
+      "ol": {
+        "=": "",
+        "_": {
+        "li": {
+          "=": "",
+          "_": {}},
+        "li": {
+          "=": "",
+          "_": {}},
+}},
+}},
+}},
+  "div": {
+    "=": "id=repeatcounter ",
+    "_": {}},
+}},
+}},
