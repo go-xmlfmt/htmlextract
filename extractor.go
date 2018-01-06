@@ -35,6 +35,10 @@ type Extractor interface {
 
 type extractor struct {
 	*html.Tokenizer
+	depth int
+	// for extOutliner
+	outputstart bool
+	levelopen   map[int]bool
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -59,7 +63,9 @@ func TagParse(parser TagParser) Tag {
 }
 
 func NewExtractor(i io.Reader) (*html.Tokenizer, *extractor) {
-	return html.NewTokenizer(i), &extractor{}
+	e := extractor{}
+	e.levelopen = make(map[int]bool)
+	return html.NewTokenizer(i), &e
 }
 
 func Walk(z *html.Tokenizer, e Extractor, w io.Writer) error {
@@ -75,8 +81,8 @@ func Walk(z *html.Tokenizer, e Extractor, w io.Writer) error {
 			}
 			return err
 		case html.StartTagToken, html.EndTagToken:
+			e.VisitToken(z, tt, w, &depth)
 			if tt == html.StartTagToken {
-				e.VisitToken(z, tt, w, &depth)
 				depth++
 			} else {
 				depth--
