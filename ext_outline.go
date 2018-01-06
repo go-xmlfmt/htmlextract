@@ -23,9 +23,8 @@ type extOutliner struct {
 ////////////////////////////////////////////////////////////////////////////
 // Function definitions
 
-func NewExtOutliner(i io.Reader) (*html.Tokenizer, *extOutliner) {
-	z, e := NewExtractor(i)
-	return z, &extOutliner{e}
+func NewExtOutliner(i io.Reader) *extOutliner {
+	return &extOutliner{NewExtractor(i)}
 }
 
 ////////////////////////////////////////////////////////////////////////////

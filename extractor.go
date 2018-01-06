@@ -30,11 +30,12 @@ type TagParser interface {
 }
 
 type Extractor interface {
+	GetBase() *extractor
 	VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writer, depth *int)
 }
 
 type extractor struct {
-	*html.Tokenizer
+	z     *html.Tokenizer
 	depth int
 	// for extOutliner
 	outputstart bool
@@ -62,39 +63,42 @@ func TagParse(parser TagParser) Tag {
 	return Tag{Name: string(name), Attr: attr}
 }
 
-func NewExtractor(i io.Reader) (*html.Tokenizer, *extractor) {
+func NewExtractor(i io.Reader) *extractor {
 	e := extractor{}
+	e.z = html.NewTokenizer(i)
 	e.levelopen = make(map[int]bool)
-	return html.NewTokenizer(i), &e
+	return &e
 }
 
-func Walk(z *html.Tokenizer, e Extractor, w io.Writer) error {
+func Walk(e Extractor, w io.Writer) error {
+	b := e.GetBase()
 	// https://godoc.org/golang.org/x/net/html
-	depth := 0
 	for {
-		tt := z.Next()
+		tt := b.z.Next()
 		switch tt {
 		case html.ErrorToken:
-			err := z.Err()
+			err := b.z.Err()
 			if err == io.EOF {
 				return nil // finished reading
 			}
 			return err
 		case html.StartTagToken, html.EndTagToken:
-			e.VisitToken(z, tt, w, &depth)
+			e.VisitToken(b.z, tt, w, &b.depth)
 			if tt == html.StartTagToken {
-				depth++
+				b.depth++
 			} else {
-				depth--
+				b.depth--
 			}
 		default:
-			e.VisitToken(z, tt, w, &depth)
+			e.VisitToken(b.z, tt, w, &b.depth)
 		}
 	}
 }
 
 ////////////////////////////////////////////////////////////////////////////
 // Method definitions
+
+func (e *extractor) GetBase() *extractor { return e }
 
 func (e *extractor) VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writer, depth *int) {
 	verbose(2, ">: %d (%v)", *depth, tt)
