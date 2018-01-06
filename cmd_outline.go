@@ -7,7 +7,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"regexp"
 
@@ -20,7 +19,7 @@ import (
 func outlineCLI(ctx *cli.Context) error {
 	rootArgv = ctx.RootArgv().(*rootT)
 	argv := ctx.Argv().(*outlineT)
-	fmt.Printf("[outline]:\n  %+v\n  %+v\n  %v\n", rootArgv, argv, ctx.Args())
+	// fmt.Printf("[outline]:\n  %+v\n  %+v\n  %v\n", rootArgv, argv, ctx.Args())
 	Opts.Case, Opts.Verbose =
 		rootArgv.Case, rootArgv.Verbose.Value()
 

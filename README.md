@@ -26,8 +26,8 @@
 
 The `htmlextract` makes it easy to look at the HTML files from different aspects. 
 
-- **`htmlextract outline`** will extract HTML structure as outline so as more easy to focus on the structure, not the details.
-- **`htmlextract clean`** will clean up HTML tags & attributes as much as possible, so as to be able to go back to the plain text version as much as possible. 
+- **`htmlextract outline`** will extract HTML structure as outline so as to focus more easily on the structure, not the details.
+- **`htmlextract clean`** will clean up HTML tags & attributes as much as possible, so as to go back to the plain text version as easy as possible. 
 - **`htmlextract h2md`** will convert HTML to .md file on top of above clean up.
 
 # Usage
@@ -314,8 +314,8 @@ Options:
 
 ### Advantages
 
-- By extracting HTML structure as outline, the `htmlextract outline` will make it easier analyse the file structure, which is most often needed when doing web scrapping or WebDriver code developing.
-- The output is mindfully chosen as the JSON format so as to take advantage of the dynamic folder feature that the text editors provide. Or you can use the [jsonformatter.org](https://jsonformatter.org/) online as well, even without a text editors.
+- By extracting HTML structure as outline, the `htmlextract outline` will make it easier to analyse the file structure, by eliminating all the glory details out of the way, which is most often needed when doing web scrapping or WebDriver code developing.
+- The output is mindfully chosen as the JSON format so as to easily take advantage of the dynamic folding feature that the text editors provide. Or you can use the [jsonformatter.org](https://jsonformatter.org/) online as well, even without a text editors.
 
 Here is a screenshot of viewing the result of `htmlextract outline -i test/sample2.html`:
 
