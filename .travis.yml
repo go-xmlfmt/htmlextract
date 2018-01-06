@@ -1,0 +1,5 @@
+# -*- yaml -*-
+
+language: go
+
+env:
