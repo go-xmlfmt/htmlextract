@@ -348,6 +348,6 @@ go get github.com/go-xmlfmt/htmlextract
 
 - [Antonio SUN](https://github.com/AntonioSun)
 
-Powered by **[WireFrame]**(https://github.com/go-easygen/wireframe), the one-stop wire-framing solution for Go cli based projects, from start to deploy.
+_Powered by_ [**WireFrame**](https://github.com/go-easygen/wireframe), the _one-stop wire-framing solution_ for Go cli based projects, from start to deploy.
 
 All patches welcome. 
