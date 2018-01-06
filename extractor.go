@@ -58,8 +58,8 @@ func TagParse(parser TagParser) Tag {
 	return Tag{Name: string(name), Attr: attr}
 }
 
-func NewExtractor(i io.Reader) (*html.Tokenizer, extractor) {
-	return html.NewTokenizer(i), extractor{}
+func NewExtractor(i io.Reader) (*html.Tokenizer, *extractor) {
+	return html.NewTokenizer(i), &extractor{}
 }
 
 func Walk(z *html.Tokenizer, e Extractor, w io.Writer) error {
@@ -90,7 +90,7 @@ func Walk(z *html.Tokenizer, e Extractor, w io.Writer) error {
 ////////////////////////////////////////////////////////////////////////////
 // Method definitions
 
-func (e extractor) VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writer, depth *int) {
+func (e *extractor) VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writer, depth *int) {
 	verbose(2, ">: %d (%v)", *depth, tt)
 	switch tt {
 	case html.TextToken:
@@ -115,6 +115,6 @@ func (e extractor) VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writer,
 	verbose(2, "<: %d", *depth)
 }
 
-func (e extractor) PrintElmt(w io.Writer, depth int, s string) {
+func (e *extractor) PrintElmt(w io.Writer, depth int, s string) {
 	fmt.Fprintf(w, "%*s%s\n", depth*2, "", s)
 }

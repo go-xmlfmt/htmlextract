@@ -24,14 +24,14 @@ type extOutliner struct {
 ////////////////////////////////////////////////////////////////////////////
 // Function definitions
 
-func NewExtOutliner(i io.Reader) (*html.Tokenizer, extOutliner) {
-	return html.NewTokenizer(i), extOutliner{}
+func NewExtOutliner(i io.Reader) (*html.Tokenizer, *extOutliner) {
+	return html.NewTokenizer(i), &extOutliner{}
 }
 
 ////////////////////////////////////////////////////////////////////////////
 // Method definitions
 
-func (e extOutliner) VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writer, depth *int) {
+func (e *extOutliner) VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writer, depth *int) {
 	verbose(2, ">: %d (%v)", *depth, tt)
 	switch tt {
 	case html.StartTagToken, html.SelfClosingTagToken:
@@ -45,7 +45,7 @@ func (e extOutliner) VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Write
 	verbose(2, "<: %d", *depth)
 }
 
-func (e extOutliner) PrintTag(w io.Writer, depth int, tag Tag) {
+func (e *extOutliner) PrintTag(w io.Writer, depth int, tag Tag) {
 	if !e.output {
 		return
 	}
