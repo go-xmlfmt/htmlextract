@@ -31,7 +31,7 @@ type TagParser interface {
 
 type Extractor interface {
 	GetBase() *extractor
-	VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writer, depth *int)
+	VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writer)
 }
 
 type extractor struct {
@@ -83,14 +83,14 @@ func Walk(e Extractor, w io.Writer) error {
 			}
 			return err
 		case html.StartTagToken, html.EndTagToken:
-			e.VisitToken(b.z, tt, w, &b.depth)
 			if tt == html.StartTagToken {
 				b.depth++
 			} else {
 				b.depth--
 			}
+			e.VisitToken(b.z, tt, w)
 		default:
-			e.VisitToken(b.z, tt, w, &b.depth)
+			e.VisitToken(b.z, tt, w)
 		}
 	}
 }
@@ -100,31 +100,31 @@ func Walk(e Extractor, w io.Writer) error {
 
 func (e *extractor) GetBase() *extractor { return e }
 
-func (e *extractor) VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writer, depth *int) {
-	verbose(2, ">: %d (%v)", *depth, tt)
+func (e *extractor) VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writer) {
+	verbose(2, ">: %d (%v)", e.depth, tt)
 	switch tt {
 	case html.TextToken:
-		if *depth > 0 {
+		if e.depth > 0 {
 			// emitBytes should copy the []byte it receives,
 			// if it doesn't process it immediately.
 			// emitBytes(z.Text())
 
 			text := strings.TrimSpace(string(z.Text()))
 			if text != "" {
-				e.PrintElmt(w, *depth, text)
+				e.PrintElmt(w, text)
 			}
 		}
 	case html.StartTagToken, html.SelfClosingTagToken:
 		tag := TagParse(z)
 		verbose(2, " T: %#v", tag)
 		if tag.Name == "body" {
-			*depth = 0
+			e.depth = 0
 		}
-		e.PrintElmt(w, *depth, tag.Name)
+		e.PrintElmt(w, tag.Name)
 	}
-	verbose(2, "<: %d", *depth)
+	verbose(2, "<: %d", e.depth)
 }
 
-func (e *extractor) PrintElmt(w io.Writer, depth int, s string) {
-	fmt.Fprintf(w, "%*s%s\n", depth*2, "", s)
+func (e *extractor) PrintElmt(w io.Writer, s string) {
+	fmt.Fprintf(w, "%*s%s\n", e.depth*2, "", s)
 }
