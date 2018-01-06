@@ -45,16 +45,29 @@ Here is a screenshot of viewing the result of `htmlextract outline -i test/sampl
 # Download binaries
 
 - The latest binary executables are available under  
-https://github.com/go-xmlfmt/{{.Name}}/releases  
+https://bintray.com/version/files/antoniosun/bin/{{.Name}}/latest  
 as the result of the Continuous-Integration process.
-- I.e., they are built right from the source code during every git tagging commit automatically by [travis-ci](https://travis-ci.org/).
-- Pick & choose the binary executable that suits your OS and its architecture. E.g., for Linux, it would most probably be the `{{.Name}}_linux_VER_amd64` file. If your OS and its architecture is not available in the download list, please let me know and I'll add it.
+- I.e., they are built right from the source code during every git push, automatically by [travis-ci](https://travis-ci.org/).
+- Pick & choose the binary executable that suits your OS and its architecture. E.g., for Linux, it would most probably be the `{{.Name}}-linux-amd64` file. If your OS and its architecture is not available in the download list, please let me know and I'll add it.
 - You may want to rename it to a shorter name instead, e.g., `{{.Name}}`, after downloading it. 
 
 
 # Debian package
 
-Available at the above releases url as well.
+Available at https://bintray.com/antoniosun/deb/{{.Name}},  
+or directly at  https://dl.bintray.com/antoniosun/deb:
+
+```
+echo "deb [trusted=yes] https://dl.bintray.com/antoniosun/deb all main" | sudo tee /etc/apt/sources.list.d/antoniosun-debs.list
+sudo apt-get update
+
+sudo chmod 644 /etc/apt/sources.list.d/antoniosun-debs.list
+apt-cache policy {{.Name}}
+
+sudo apt-get install -y {{.Name}}
+```
+
+
 
 # Install Source
 
