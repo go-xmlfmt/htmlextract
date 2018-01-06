@@ -17,6 +17,18 @@ import (
 ////////////////////////////////////////////////////////////////////////////
 // Constant and data type/structure definitions
 
+type attributes map[string]string
+
+type Tag struct {
+	Name string
+	Attr attributes
+}
+
+type TagParser interface {
+	TagName() (name []byte, hasAttr bool)
+	TagAttr() (key, val []byte, moreAttr bool)
+}
+
 type Extractor interface {
 	VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writer, depth *int)
 }
@@ -28,12 +40,27 @@ type extractor struct {
 ////////////////////////////////////////////////////////////////////////////
 // Function definitions
 
+func TagParse(parser TagParser) Tag {
+
+	name, hasAttr := parser.TagName()
+	attr := make(attributes)
+
+	if hasAttr {
+		for {
+			key, value, more := parser.TagAttr()
+			attr[string(key)] = string(value)
+			if !more {
+				break
+			}
+		}
+	}
+
+	return Tag{Name: string(name), Attr: attr}
+}
+
 func NewExtractor(i io.Reader) (*html.Tokenizer, extractor) {
 	return html.NewTokenizer(i), extractor{}
 }
-
-////////////////////////////////////////////////////////////////////////////
-// Method definitions
 
 func Walk(z *html.Tokenizer, e Extractor, w io.Writer) error {
 	// https://godoc.org/golang.org/x/net/html
@@ -60,6 +87,9 @@ func Walk(z *html.Tokenizer, e Extractor, w io.Writer) error {
 	}
 }
 
+////////////////////////////////////////////////////////////////////////////
+// Method definitions
+
 func (e extractor) VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writer, depth *int) {
 	verbose(2, ">: %d (%v)", *depth, tt)
 	switch tt {
@@ -75,13 +105,12 @@ func (e extractor) VisitToken(z *html.Tokenizer, tt html.TokenType, w io.Writer,
 			}
 		}
 	case html.StartTagToken, html.SelfClosingTagToken:
-		tn, _ := z.TagName()
-		tag := string(tn)
-		verbose(2, " T: %s", tag)
-		if tag == "body" {
+		tag := TagParse(z)
+		verbose(2, " T: %#v", tag)
+		if tag.Name == "body" {
 			*depth = 0
 		}
-		e.PrintElmt(w, *depth, tag)
+		e.PrintElmt(w, *depth, tag.Name)
 	}
 	verbose(2, "<: %d", *depth)
 }
