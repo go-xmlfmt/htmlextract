@@ -7,8 +7,8 @@
 package main
 
 import (
-	"github.com/mkideal/cli"
-	clix "github.com/mkideal/cli/ext"
+	"github.com/go-easygen/cli"
+	clix "github.com/go-easygen/cli/ext"
 )
 
 ////////////////////////////////////////////////////////////////////////////
