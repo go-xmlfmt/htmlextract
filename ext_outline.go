@@ -9,6 +9,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"strings"
 
 	"golang.org/x/net/html"
 )
@@ -81,9 +82,16 @@ func (e *extOutliner) PrintAttr(w io.Writer, am attributes) {
 		return
 	}
 	for _, p := range attrPick {
-		a, ok := am[p]
-		if ok {
-			fmt.Fprintf(w, "%s=%s ", p, a)
+		if p == "css" {
+			a, ok := am["class"]
+			if ok {
+				fmt.Fprintf(w, "%s=%s ", p, "."+strings.Join(strings.Fields(a), "."))
+			}
+		} else {
+			a, ok := am[p]
+			if ok {
+				fmt.Fprintf(w, "%s=%s ", p, a)
+			}
 		}
 	}
 }

@@ -30,9 +30,9 @@
     <textarea rows="10" cols="100" id="csvResults"></textarea>
   </div>
   <div id="printerSupport" class="supporter" style="display: none;">
-    <input type='button' value='Print All' onclick='printGrid()' />
-    <input type='button' value='Print Selected' onclick='printSelected()' />
-    <input type='button' value='Print Preview' onclick='printPreview()' />
+    <input type='button' class="print all" value='Print All' onclick='printGrid()' />
+    <input type='button' class="print sel" value='Print Selected' onclick='printSelected()' />
+    <input type='button' class="print preview'" value='Print Preview' onclick='printPreview()' />
     Use Title:<input id='print_title' type='text' value='Favorite Music' />
   </div>
   <div id="cellMergeSupport" class="supporter" style="display: none;">
@@ -66,7 +66,7 @@
       </tr>
     </table>
   </div>
-  <div class="tutor">
+  <div class="tutor footer howtouse">
     <p>
       <h2>How to use this page:</h2>
       <ol>

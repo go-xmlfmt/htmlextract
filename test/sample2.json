@@ -7,10 +7,10 @@
 {
 
 "body": {
-  "=": "",
+  "=": "css=.claro ",
   "_": {
   "h1": {
-    "=": "",
+    "=": "css=.title ",
     "_": {}},
   "div": {
     "=": "id=ctrlBtns ",
@@ -102,7 +102,7 @@
 }},
 }},
   "div": {
-    "=": "id=exporterSupport ",
+    "=": "id=exporterSupport css=.supporter ",
     "_": {
     "input": {
       "=": "id=exportAllCSV type=button ",
@@ -121,7 +121,7 @@
       "_": {}},
 }},
   "div": {
-    "=": "id=printerSupport ",
+    "=": "id=printerSupport css=.supporter ",
     "_": {
     "input": {
       "=": "type=button onclick=printGrid() ",
@@ -137,7 +137,7 @@
       "_": {}},
 }},
   "div": {
-    "=": "id=cellMergeSupport ",
+    "=": "id=cellMergeSupport css=.supporter ",
     "_": {
     "table": {
       "=": "",
@@ -212,7 +212,7 @@
 }},
 }},
   "div": {
-    "=": "id=paginationSupport ",
+    "=": "id=paginationSupport css=.supporter ",
     "_": {
     "table": {
       "=": "",
@@ -268,7 +268,7 @@
 }},
 }},
   "div": {
-    "=": "",
+    "=": "css=.tutor ",
     "_": {
     "p": {
       "=": "",
