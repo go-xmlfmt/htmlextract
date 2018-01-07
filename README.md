@@ -35,7 +35,7 @@ The `htmlextract` makes it easy to look at the HTML files from different aspects
 ### $ htmlextract
 ```sh
 HTML Extraction Tool
-Version 0.1.0 built on 2018-01-06
+Version 0.1.0 built on 2018-01-07
 
 Tool to extract info from HTML
 
@@ -110,10 +110,10 @@ Options:
 {
 
 "body": {
-  "=": "",
+  "=": "css=.claro ",
   "_": {
   "h1": {
-    "=": "",
+    "=": "css=.title ",
     "_": {}},
   "div": {
     "=": "id=ctrlBtns ",
@@ -158,7 +158,7 @@ Options:
 }},
 }},
   "div": {
-    "=": "id=exporterSupport ",
+    "=": "id=exporterSupport css=.supporter ",
     "_": {
     "input": {
       "=": "id=exportAllCSV type=button ",
@@ -168,23 +168,23 @@ Options:
       "_": {}},
 }},
   "div": {
-    "=": "id=printerSupport ",
+    "=": "id=printerSupport css=.supporter ",
     "_": {
     "input": {
-      "=": "type=button onclick=printGrid() ",
+      "=": "css=.print.all type=button onclick=printGrid() ",
       "_": {}},
     "input": {
-      "=": "type=button onclick=printSelected() ",
+      "=": "css=.print.sel type=button onclick=printSelected() ",
       "_": {}},
     "input": {
-      "=": "type=button onclick=printPreview() ",
+      "=": "css=.print.preview' type=button onclick=printPreview() ",
       "_": {}},
     "input": {
       "=": "id=print_title type=text ",
       "_": {}},
 }},
   "div": {
-    "=": "id=cellMergeSupport ",
+    "=": "id=cellMergeSupport css=.supporter ",
     "_": {
     "table": {
       "=": "",
@@ -259,7 +259,7 @@ Options:
 }},
 }},
   "div": {
-    "=": "id=paginationSupport ",
+    "=": "id=paginationSupport css=.supporter ",
     "_": {
     "table": {
       "=": "",
@@ -285,7 +285,7 @@ Options:
 }},
 }},
   "div": {
-    "=": "",
+    "=": "css=.tutor.footer.howtouse ",
     "_": {
     "p": {
       "=": "",
@@ -317,9 +317,9 @@ Options:
 - By extracting HTML structure as outline, the `htmlextract outline` will make it easier to analyse the file structure, by eliminating all the glory details out of the way, which is most often needed when doing web scrapping or WebDriver code developing.
 - The output is mindfully chosen as the JSON format so as to easily take advantage of the dynamic folding feature that the text editors provide. Or you can use the [jsonformatter.org](https://jsonformatter.org/) online as well, even without a text editor.
 
-Here is a screenshot of viewing the result of `htmlextract outline -i test/sample2.html`:
+Here is a screenshot of viewing the result of `htmlextract outline -i test/sample0.html`:
 
-![sample2.png](sample2.png "sample2.png")
+![sample.png](sample.png "Sample screenshot")
 
 # Download binaries
 

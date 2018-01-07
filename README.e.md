@@ -38,9 +38,9 @@ The `htmlextract` makes it easy to look at the HTML files from different aspects
 - By extracting HTML structure as outline, the `htmlextract outline` will make it easier to analyse the file structure, by eliminating all the glory details out of the way, which is most often needed when doing web scrapping or WebDriver code developing.
 - The output is mindfully chosen as the JSON format so as to easily take advantage of the dynamic folding feature that the text editors provide. Or you can use the [jsonformatter.org](https://jsonformatter.org/) online as well, even without a text editor.
 
-Here is a screenshot of viewing the result of `htmlextract outline -i test/sample2.html`:
+Here is a screenshot of viewing the result of `htmlextract outline -i test/sample0.html`:
 
-![sample2.png](sample2.png "sample2.png")
+![sample.png](sample.png "Sample screenshot")
 
 # Download binaries
 
