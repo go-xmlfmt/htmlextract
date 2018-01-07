@@ -324,9 +324,10 @@ Here is a screenshot of viewing the result of `htmlextract outline -i test/sampl
 # Download binaries
 
 - The latest binary executables are available under  
+https://bintray.com/antoniosun/bin/htmlextract/latest, or directly under  
 https://bintray.com/version/files/antoniosun/bin/htmlextract/latest  
 as the result of the Continuous-Integration process.
-- I.e., they are built right from the source code during every git push, automatically by [travis-ci](https://travis-ci.org/).
+- I.e., they are built during every git push, automatically by [travis-ci](https://travis-ci.org/), right from the source code, truely WYSIWYG.
 - Pick & choose the binary executable that suits your OS and its architecture. E.g., for Linux, it would most probably be the `htmlextract-linux-amd64` file. If your OS and its architecture is not available in the download list, please let me know and I'll add it.
 - You may want to rename it to a shorter name instead, e.g., `htmlextract`, after downloading it. 
 

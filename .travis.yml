@@ -22,7 +22,7 @@ script:
   - go get -t -v ./...
   - go build -v
   - go test -v ./...
-#  - ( cd test; ./shell_test.sh )
+  - ( cd test; ./shell_test.sh )
 
   - go get github.com/mitchellh/gox
   - gox -osarch="linux/386 linux/amd64 windows/amd64 windows/386 darwin/amd64" -output="out/{{.Dir}}-{{.OS}}-{{.Arch}}"
