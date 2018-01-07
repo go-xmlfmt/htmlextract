@@ -45,6 +45,11 @@ Command:
         Flag: 'o,output'
         Usage: 'The output outline file (default: input.json)'
 
+      - Name: Attributes
+        Type: '[]string'
+        Flag: 'a,attributes'
+        Usage: extra attributes to include (may be more than one)
+
 
   - Name: clean
     Desc: Clean up HTML tags & attributes as much as possible

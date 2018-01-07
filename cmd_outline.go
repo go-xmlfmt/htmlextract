@@ -22,7 +22,9 @@ func outlineCLI(ctx *cli.Context) error {
 	// fmt.Printf("[outline]:\n  %+v\n  %+v\n  %v\n", rootArgv, argv, ctx.Args())
 	Opts.Case, Opts.Verbose =
 		rootArgv.Case, rootArgv.Verbose.Value()
+	attrPick = append(attrPick, argv.Attributes...)
 
+	verbose(2, "Input file: '%s'", argv.Filei.Name())
 	if !ctx.IsSet("--output") {
 		fileo, err := os.Create(
 			regexp.MustCompile(`(?i)html?`).

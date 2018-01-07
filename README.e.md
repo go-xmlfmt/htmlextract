@@ -42,6 +42,17 @@ Here is a screenshot of viewing the result of `htmlextract outline -i test/sampl
 
 ![sample.png](sample.png "Sample screenshot")
 
+### Usage
+
+If the predefined attribute selection is not enough, the it is easily to add your own by the `-a, --attributes` switch. Note that you can use the switch as many times as you wish, to provide as many attributes as you nee:
+
+```sh
+$ htmlextract outline -a dojotype -a style -i test/sample0.html -o | grep -1 dojotype | head -3 
+  "div": {
+    "=": "id=pluginList dojotype=PluginTable style=float:right; ",
+    "_": {}},
+```
+
 # Download binaries
 
 - The latest binary executables are available under  

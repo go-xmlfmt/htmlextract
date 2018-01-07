@@ -17,6 +17,7 @@
   - [Outline](#outline)
     - [$ htmlextract outline -i test/sample0.html -o](#-htmlextract-outline--i-testsample0html--o)
     - [Advantages](#advantages)
+    - [Usage](#usage-1)
 - [Download binaries](#download-binaries)
 - [Debian package](#debian-package)
 - [Install Source](#install-source)
@@ -61,11 +62,12 @@ Usage:
 
 Options:
 
-  -h, --help      display help information
-  -c, --case      1: lowercase tags, 2: uppercase, 0: no-change.
-  -v, --verbose   Verbose mode (Multiple -v options increase the verbosity.)
-  -i, --input    *The file/url to extract from (mandatory)
-  -o, --output    The output outline file (default: input.json)
+  -h, --help         display help information
+  -c, --case         1: lowercase tags, 2: uppercase, 0: no-change.
+  -v, --verbose      Verbose mode (Multiple -v options increase the verbosity.)
+  -i, --input       *The file/url to extract from (mandatory)
+  -o, --output       The output outline file (default: input.json)
+  -a, --attributes   extra attributes to include (may be more than one)
 ```
 
 ### $ htmlextract clean
@@ -320,6 +322,17 @@ Options:
 Here is a screenshot of viewing the result of `htmlextract outline -i test/sample0.html`:
 
 ![sample.png](sample.png "Sample screenshot")
+
+### Usage
+
+If the predefined attribute selection is not enough, the it is easily to add your own by the `-a, --attributes` switch. Note that you can use the switch as many times as you wish, to provide as many attributes as you nee:
+
+```sh
+$ htmlextract outline -a dojotype -a style -i test/sample0.html -o | grep -1 dojotype | head -3 
+  "div": {
+    "=": "id=pluginList dojotype=PluginTable style=float:right; ",
+    "_": {}},
+```
 
 # Download binaries
 

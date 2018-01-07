@@ -51,7 +51,7 @@ var root = &cli.Command{
 //  var (
 //          progname  = "htmlextract"
 //          version   = "0.1.0"
-//          date = "2018-01-01"
+//          date = "2018-01-07"
 
 //  	rootArgv *rootT
 //  	// Opts store all the configurable options
@@ -102,8 +102,9 @@ var root = &cli.Command{
 //  }
 
 type outlineT struct {
-	Filei *clix.Reader `cli:"*i,input" usage:"The file/url to extract from (mandatory)"`
-	Fileo *clix.Writer `cli:"o,output" usage:"The output outline file (default: input.json)"`
+	Filei      *clix.Reader `cli:"*i,input" usage:"The file/url to extract from (mandatory)"`
+	Fileo      *clix.Writer `cli:"o,output" usage:"The output outline file (default: input.json)"`
+	Attributes []string     `cli:"a,attributes" usage:"extra attributes to include (may be more than one)"`
 }
 
 var outlineDef = &cli.Command{

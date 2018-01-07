@@ -1,0 +1,209 @@
+
+
+
+
+
+
+{
+
+"body": {
+  "=": "css=.claro ",
+  "_": {
+  "h1": {
+    "=": "css=.title ",
+    "_": {}},
+  "div": {
+    "=": "id=ctrlBtns ",
+    "_": {}},
+  "br": {
+    "=": "",
+    "_": {}},
+  "div": {
+    "=": "id=pluginList dojotype=PluginTable style=float:right; ",
+    "_": {}},
+  "div": {
+    "=": "id=gridContainer ",
+    "_": {}},
+  "br": {
+    "=": "",
+    "_": {}},
+  "div": {
+    "=": "id=ctrlBtns2 ",
+    "_": {}},
+  "br": {
+    "=": "",
+    "_": {}},
+  "div": {
+    "=": "id=menusSupport style=display: none; ",
+    "_": {
+    "div": {
+      "=": "id=headerMenu dojotype=dijit.Menu style=display: none; ",
+      "_": {
+      "div": {
+        "=": "dojotype=dijit.MenuItem ",
+        "_": {}},
+      "div": {
+        "=": "dojotype=dijit.MenuItem ",
+        "_": {}},
+}},
+    "div": {
+      "=": "id=rowMenu dojotype=dijit.Menu style=display: none; ",
+      "_": {
+      "div": {
+        "=": "dojotype=dijit.MenuItem ",
+        "_": {}},
+}},
+}},
+  "div": {
+    "=": "id=exporterSupport css=.supporter style=display: none; ",
+    "_": {
+    "input": {
+      "=": "id=exportAllCSV type=button ",
+      "_": {}},
+    "textarea": {
+      "=": "id=csvResults ",
+      "_": {}},
+}},
+  "div": {
+    "=": "id=printerSupport css=.supporter style=display: none; ",
+    "_": {
+    "input": {
+      "=": "css=.print.all type=button onclick=printGrid() ",
+      "_": {}},
+    "input": {
+      "=": "css=.print.sel type=button onclick=printSelected() ",
+      "_": {}},
+    "input": {
+      "=": "css=.print.preview' type=button onclick=printPreview() ",
+      "_": {}},
+    "input": {
+      "=": "id=print_title type=text ",
+      "_": {}},
+}},
+  "div": {
+    "=": "id=cellMergeSupport css=.supporter style=display: none; ",
+    "_": {
+    "table": {
+      "=": "",
+      "_": {
+      "tr": {
+        "=": "",
+        "_": {
+        "td": {
+          "=": "",
+          "_": {}},
+        "td": {
+          "=": "",
+          "_": {
+          "input": {
+            "=": "id=inputRow type=text ",
+            "_": {}},
+}},
+}},
+      "tr": {
+        "=": "",
+        "_": {
+        "td": {
+          "=": "",
+          "_": {}},
+        "td": {
+          "=": "",
+          "_": {
+          "input": {
+            "=": "id=inputStart type=text ",
+            "_": {}},
+}},
+}},
+      "tr": {
+        "=": "",
+        "_": {
+        "td": {
+          "=": "",
+          "_": {}},
+        "td": {
+          "=": "",
+          "_": {
+          "input": {
+            "=": "id=inputEnd type=text ",
+            "_": {}},
+}},
+}},
+      "tr": {
+        "=": "",
+        "_": {
+        "td": {
+          "=": "",
+          "_": {}},
+        "td": {
+          "=": "",
+          "_": {
+          "input": {
+            "=": "id=inputMajor type=text ",
+            "_": {}},
+}},
+}},
+      "tr": {
+        "=": "",
+        "_": {
+        "td": {
+          "=": "",
+          "_": {
+          "button": {
+            "=": "id=mergeCell onclick=mergeCells() ",
+            "_": {}},
+}},
+}},
+}},
+}},
+  "div": {
+    "=": "id=paginationSupport css=.supporter style=display:none; ",
+    "_": {
+    "table": {
+      "=": "",
+      "_": {
+      "tr": {
+        "=": "",
+        "_": {
+        "td": {
+          "=": "",
+          "_": {
+          "input": {
+            "=": "id=inputScrollToRowIdx type=text ",
+            "_": {}},
+}},
+        "td": {
+          "=": "",
+          "_": {
+          "button": {
+            "=": "id=scrollToRow ",
+            "_": {}},
+}},
+}},
+}},
+}},
+  "div": {
+    "=": "css=.tutor.footer.howtouse ",
+    "_": {
+    "p": {
+      "=": "",
+      "_": {
+      "h2": {
+        "=": "",
+        "_": {}},
+      "ol": {
+        "=": "",
+        "_": {
+        "li": {
+          "=": "",
+          "_": {}},
+        "li": {
+          "=": "",
+          "_": {}},
+}},
+}},
+}},
+  "div": {
+    "=": "id=repeatcounter style=float: left; ",
+    "_": {}},
+}},
+}},
