@@ -7,6 +7,7 @@
 package main
 
 import (
+	"net/url"
 	"os"
 	"regexp"
 
@@ -24,11 +25,27 @@ func outlineCLI(ctx *cli.Context) error {
 		rootArgv.Case, rootArgv.Verbose.Value()
 	attrPick = append(attrPick, argv.Attributes...)
 
-	verbose(2, "Input file: '%s'", argv.Filei.Name())
+	fin := argv.Filei.Name()
+	verbose(2, "Input file: '%s'", fin)
+	if regexp.MustCompile(`(?i)^http`).MatchString(fin) {
+		u, e := url.QueryUnescape(fin)
+		abortOn("Input url error", e)
+		// in case url contains ?param1=...&param2=...
+		up, _ := url.Parse(u)
+		verbose(2, "url: %#v", up)
+		// in case up.Path is empty
+		u = up.Host + up.Path
+		// in case of ending '/'
+		u = regexp.MustCompile(`^(.*)/$`).ReplaceAllString(u, "${1}.")
+		// get the name from the last part, less extension
+		fin = regexp.MustCompile(`^.*/(.*)\.[^.]*$`).ReplaceAllString(u, "${1}")
+		fin += ".html"
+		verbose(2, "Input file: '%s'", fin)
+	}
 	if !ctx.IsSet("--output") {
 		fileo, err := os.Create(
-			regexp.MustCompile(`(?i)html?`).
-				ReplaceAllLiteralString(argv.Filei.Name(), "json"))
+			regexp.MustCompile(`(?i).html?$`).
+				ReplaceAllLiteralString(fin, ".json"))
 		abortOn("Creating output file", err)
 		argv.Fileo.SetWriter(fileo)
 	}
