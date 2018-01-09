@@ -318,7 +318,7 @@ Options:
 
 ### Advantages
 
-- By extracting HTML structure as outline, the `htmlextract outline` will make it easier to analyse the file structure, by eliminating all the glory details out of the way, which is most often needed when doing web scrapping or WebDriver code developing.
+- By extracting HTML structure as outline, the `htmlextract outline` will make it easier to analyze the file structure, by eliminating all the glory details out of the way, which is most often needed when doing web scrapping or WebDriver code developing.
 - The output is mindfully chosen as the JSON format so as to easily take advantage of the dynamic folding feature that the text editors provide. Or you can use the [jsonformatter.org](https://jsonformatter.org/) online as well, even without a text editor.
 
 Here is a screenshot of viewing the result of `htmlextract outline -i test/sample0.html`:
@@ -377,7 +377,7 @@ $ htmlextract outline -i http://demoaut.katalon.com/profile.php -o | head -35
 https://bintray.com/antoniosun/bin/htmlextract/latest, or directly under  
 https://bintray.com/version/files/antoniosun/bin/htmlextract/latest  
 as the result of the Continuous-Integration process.
-- I.e., they are built during every git push, automatically by [travis-ci](https://travis-ci.org/), right from the source code, truely WYSIWYG.
+- I.e., they are built during every git push, automatically by [travis-ci](https://travis-ci.org/), right from the source code, truly WYSIWYG.
 - Pick & choose the binary executable that suits your OS and its architecture. E.g., for Linux, it would most probably be the `htmlextract-linux-amd64` file. If your OS and its architecture is not available in the download list, please let me know and I'll add it.
 - You may want to rename it to a shorter name instead, e.g., `htmlextract`, after downloading it. 
 
