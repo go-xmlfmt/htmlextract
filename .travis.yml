@@ -19,6 +19,7 @@ env:
 
 
 script:
+  - echo 'America/Toronto' > /etc/timezone
   - go get -t -v ./...
   - go build -v -ldflags="-X main.date=`date -I`"
   - htmlextract

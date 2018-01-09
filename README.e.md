@@ -44,7 +44,9 @@ Here is a screenshot of viewing the result of `htmlextract outline -i test/sampl
 
 ### Usage
 
-If the predefined attribute selection is not enough, the it is easily to add your own by the `-a, --attributes` switch. Note that you can use the switch as many times as you wish, to provide as many attributes as you nee:
+#### Specifying more attributes
+
+If the predefined attribute selection is not enough, the it is easily to add your own by the `-a, --attributes` switch. Note that you can use the switch as many times as you wish, to provide as many attributes as you need:
 
 ```sh
 $ htmlextract outline -a dojotype -a style -i test/sample0.html -o | grep -1 dojotype | head -3 
@@ -52,6 +54,39 @@ $ htmlextract outline -a dojotype -a style -i test/sample0.html -o | grep -1 doj
     "=": "id=pluginList dojotype=PluginTable style=float:right; ",
     "_": {}},
 ```
+
+#### Work with URL directly
+
+Starting with version `0.2.0`, `htmlextract` can extract from URL directly:
+
+```sh
+$ htmlextract outline -i http://demoaut.katalon.com/profile.php -o | head -35
+...
+"body": {
+  "=": "",
+  "_": {
+  "a": {
+    "=": "id=menu-toggle css=.btn.btn-dark.btn-lg.toggle ",
+    "_": {
+    "i": {
+      "=": "css=.fa.fa-bars ",
+      "_": {}},
+}},
+  "nav": {
+    "=": "id=sidebar-wrapper ",
+    "_": {
+    "ul": {
+      "=": "css=.sidebar-nav ",
+      "_": {
+      "a": {
+        "=": "id=menu-close css=.btn.btn-light.btn-lg.pull-right.toggle ",
+        "_": {
+        "i": {
+          "=": "css=.fa.fa-times ",
+          "_": {}},
+...
+```
+
 
 # Download binaries
 

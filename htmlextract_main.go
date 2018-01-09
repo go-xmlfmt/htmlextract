@@ -13,8 +13,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/labstack/gommon/color"
 	"github.com/go-easygen/cli"
+	"github.com/labstack/gommon/color"
 )
 
 ////////////////////////////////////////////////////////////////////////////
@@ -31,8 +31,8 @@ type OptsT struct {
 
 var (
 	progname = "htmlextract"
-	version  = "0.1.0"
-	date     = "2018-01-01"
+	version  = "0.2.0"
+	date     = "2018-01-08"
 
 	rootArgv *rootT
 	// Opts store all the configurable options
