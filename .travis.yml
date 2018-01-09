@@ -18,8 +18,11 @@ env:
     - PKG_LICNS="MIT"
 
 before_script:
-  - echo 'America/Toronto' | sudo tee /etc/timezone
-  - sudo dpkg-reconfigure --frontend noninteractive tzdata
+# - echo 'America/Toronto' | sudo tee /etc/timezone
+# - sudo dpkg-reconfigure --frontend noninteractive tzdata
+# the above works, but try not to be that heavy-handed:
+  - export TZ=America/Toronto
+  - date
 
 script:
   - go get -t -v ./...
