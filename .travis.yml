@@ -17,9 +17,11 @@ env:
     - PKG_MAINT="Antonio Sun <asun@ats.l5.ca>"
     - PKG_LICNS="MIT"
 
+before_script:
+  - echo 'America/Toronto' | sudo tee /etc/timezone
+  - sudo dpkg-reconfigure --frontend noninteractive tzdata
 
 script:
-  - echo 'America/Toronto' > /etc/timezone
   - go get -t -v ./...
   - go build -v -ldflags="-X main.date=`date -I`"
   - htmlextract
