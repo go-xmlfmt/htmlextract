@@ -5,7 +5,7 @@
 {{template "badge/godoc" .}}
 {{template "badge/goreport" .}}
 {{template "badge/travis" .}}
-[![PoweredBy WireFrame](PoweredBy-WireFrame-B.svg)](http://godoc.org/github.com/go-easygen/wireframe)
+[![PoweredBy WireFrame](https://github.com/go-easygen/wireframe/blob/master/PoweredBy-WireFrame-R.svg)](http://godoc.org/github.com/go-easygen/wireframe)
 
 ## {{toc 5}}
 
