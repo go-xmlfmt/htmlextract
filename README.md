@@ -5,6 +5,7 @@
 [![GoDoc](https://godoc.org/github.com/go-xmlfmt/htmlextract?status.svg)](http://godoc.org/github.com/go-xmlfmt/htmlextract)
 [![Go Report Card](https://goreportcard.com/badge/github.com/go-xmlfmt/htmlextract)](https://goreportcard.com/report/github.com/go-xmlfmt/htmlextract)
 [![travis Status](https://travis-ci.org/go-xmlfmt/htmlextract.svg?branch=master)](https://travis-ci.org/go-xmlfmt/htmlextract)
+[![PoweredBy WireFrame](PoweredBy-WireFrame-B.svg)](http://godoc.org/github.com/go-easygen/wireframe)
 
 ## TOC
 - [htmlextract - HTML Extraction Tool](#htmlextract---html-extraction-tool)
@@ -412,6 +413,6 @@ go get github.com/go-xmlfmt/htmlextract
 
 - [Antonio SUN](https://github.com/AntonioSun)
 
-_Powered by_ [**WireFrame**](https://github.com/go-easygen/wireframe), the _one-stop wire-framing solution_ for Go cli based projects, from start to deploy.
+_Powered by_ [**WireFrame**](https://github.com/go-easygen/wireframe),  [![PoweredBy WireFrame](https://github.com/go-easygen/wireframe/blob/master/PoweredBy-WireFrame-Y.svg)](http://godoc.org/github.com/go-easygen/wireframe), the _one-stop wire-framing solution_ for Go cli based projects, from start to deploy.
 
 All patches welcome. 

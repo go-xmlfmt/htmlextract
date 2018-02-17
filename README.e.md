@@ -5,6 +5,7 @@
 {{template "badge/godoc" .}}
 {{template "badge/goreport" .}}
 {{template "badge/travis" .}}
+[![PoweredBy WireFrame](PoweredBy-WireFrame-B.svg)](http://godoc.org/github.com/go-easygen/wireframe)
 
 ## {{toc 5}}
 
@@ -129,6 +130,6 @@ go get github.com/go-xmlfmt/htmlextract
 
 - [Antonio SUN](https://github.com/AntonioSun)
 
-_Powered by_ [**WireFrame**](https://github.com/go-easygen/wireframe), the _one-stop wire-framing solution_ for Go cli based projects, from start to deploy.
+_Powered by_ [**WireFrame**](https://github.com/go-easygen/wireframe),  [![PoweredBy WireFrame](https://github.com/go-easygen/wireframe/blob/master/PoweredBy-WireFrame-Y.svg)](http://godoc.org/github.com/go-easygen/wireframe), the _one-stop wire-framing solution_ for Go cli based projects, from start to deploy.
 
 All patches welcome. 
